@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Consultoría de IA · Automatización para negocios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #B8860B;
+      --gold-light: #D4A017;
+      --gold-pale: #FAF3E0;
+      --dark: #1A1A1A;
+      --mid: #555;
+      --light: #F7F5F0;
+      --border: #E8E0D0;
+      --white: #FFFFFF;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--dark);
+      background: var(--white);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--dark); letter-spacing: 0.02em; }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 14px; color: var(--mid); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold); color: white;
+      padding: 10px 20px; border-radius: 6px;
+      font-size: 14px; font-weight: 500; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-wa:hover { background: #9A7209; transform: translateY(-1px); }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px; margin: 0 auto;
+      padding: 80px 40px 64px;
+      display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center;
+    }
+    .hero-tag {
+      font-size: 11px; font-weight: 500; color: var(--gold);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: 56px; font-weight: 500; line-height: 1.1;
+      color: var(--dark); margin-bottom: 22px;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero p {
+      font-size: 16px; color: var(--mid); line-height: 1.75;
+      max-width: 460px; margin-bottom: 32px;
+    }
+    .hero-cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold); color: white;
+      padding: 15px 30px; border-radius: 8px;
+      font-size: 15px; font-weight: 500; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #9A7209; transform: translateY(-2px); }
+    .hero-note { font-size: 13px; color: #999; }
+    .hero-note span { color: var(--gold); margin-right: 4px; }
+    .hero-photo {
+      background: var(--light);
+      border-radius: 16px; border: 1px solid var(--border);
+      aspect-ratio: 3/4;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 12px; color: #aaa; font-size: 13px;
+      overflow: hidden; position: relative;
+    }
+    .hero-photo svg { opacity: 0.4; }
+    .hero-photo .photo-hint {
+      position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: rgba(184,134,11,0.12); color: var(--gold);
+      font-size: 12px; padding: 6px 14px; border-radius: 20px; white-space: nowrap;
+      border: 1px solid rgba(184,134,11,0.25);
+    }
+
+    /* DIVIDER */
+    hr { border: none; border-top: 1px solid var(--border); }
+
+    /* PROBLEMS */
+    .section { padding: 72px 40px; max-width: 1100px; margin: 0 auto; }
+    .section-bg { background: var(--light); }
+    .section-bg .section { max-width: 100%; padding-left: 40px; padding-right: 40px; }
+    .section-bg .inner { max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 36px; font-weight: 500; text-align: center;
+      margin-bottom: 48px; color: var(--dark);
+    }
+    .problems-grid {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;
+      margin-bottom: 28px;
+    }
+    .problem-card {
+      background: white; border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px 14px; text-align: center;
+    }
+    .problem-icon {
+      width: 44px; height: 44px; margin: 0 auto 12px;
+      background: var(--gold-pale); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .problem-icon svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .problem-card p { font-size: 13px; color: var(--mid); line-height: 1.45; }
+    .problems-note { text-align: center; font-size: 14px; color: var(--mid); }
+    .problems-note strong { color: var(--dark); }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .service-card {
+      background: white; border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .service-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .service-icon {
+      width: 48px; height: 48px; margin-bottom: 16px;
+      background: var(--gold-pale); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .service-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .service-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 10px; color: var(--dark); }
+    .service-card p { font-size: 14px; color: var(--mid); line-height: 1.6; }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid; grid-template-columns: 360px 1fr; gap: 64px; align-items: start;
+    }
+    .about-photo {
+      background: var(--light); border: 1px solid var(--border);
+      border-radius: 14px; aspect-ratio: 3/4;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px; color: #bbb; font-size: 13px; overflow: hidden; position: relative;
+    }
+    .about-photo svg { opacity: 0.35; }
+    .about-photo .photo-hint {
+      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+      background: rgba(184,134,11,0.12); color: var(--gold);
+      font-size: 12px; padding: 5px 12px; border-radius: 20px; white-space: nowrap;
+      border: 1px solid rgba(184,134,11,0.25);
+    }
+    .about-tag {
+      font-size: 11px; font-weight: 500; color: var(--gold);
+      letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .about-content h2 {
+      font-family: var(--font-display);
+      font-size: 40px; font-weight: 500; line-height: 1.15; margin-bottom: 20px;
+    }
+    .about-content p { font-size: 15px; color: var(--mid); line-height: 1.75; margin-bottom: 14px; }
+    .quote-block {
+      border-left: 3px solid var(--gold);
+      padding: 14px 20px; margin-top: 24px;
+      background: var(--gold-pale); border-radius: 0 8px 8px 0;
+      font-size: 15px; font-weight: 500; color: var(--dark); line-height: 1.55;
+    }
+
+    /* CTA FINAL */
+    .cta-section {
+      background: var(--dark);
+      padding: 80px 40px; text-align: center;
+    }
+    .cta-section h2 {
+      font-family: var(--font-display);
+      font-size: 40px; font-weight: 500; color: white;
+      margin-bottom: 14px; line-height: 1.2;
+    }
+    .cta-section p { font-size: 15px; color: #aaa; margin-bottom: 36px; }
+    .btn-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold); color: white;
+      padding: 17px 36px; border-radius: 8px;
+      font-size: 16px; font-weight: 500; text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      padding: 24px 40px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 13px; color: #aaa;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* FADE IN ANIMATION */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-left { animation: fadeUp 0.7s ease both; }
+    .hero-photo { animation: fadeUp 0.7s 0.15s ease both; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 48px 24px; }
+      .hero-photo { max-width: 340px; margin: 0 auto; }
+      .hero h1 { font-size: 40px; }
+      .problems-grid { grid-template-columns: repeat(3, 1fr); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo { max-width: 300px; }
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .section { padding: 52px 24px; }
+    }
+    @media (max-width: 600px) {
+      .problems-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 34px; }
+      .section-title { font-size: 28px; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Consultoría de IA</span>
+  <div class="nav-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <a class="btn-wa" href="https://wa.me/34651685661">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.428a.5.5 0 0 0 .614.614l5.607-1.47A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.944 9.944 0 0 1-5.073-1.386l-.362-.214-3.754.984.997-3.63-.235-.374A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Hablar por WhatsApp
+  </a>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero">
+    <div class="hero-left">
+      <p class="hero-tag">Consultoría de IA para negocios</p>
+      <h1>Menos tareas manuales.<br><em>Más tiempo</em><br>para tu negocio.</h1>
+      <p>Ayudo a pequeñas y medianas empresas a ahorrar tiempo, organizar mejor su trabajo y automatizar procesos repetitivos con soluciones de inteligencia artificial simples y efectivas.</p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="https://wa.me/34651685661">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.428a.5.5 0 0 0 .614.614l5.607-1.47A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.944 9.944 0 0 1-5.073-1.386l-.362-.214-3.754.984.997-3.63-.235-.374A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Hablar por WhatsApp
+        </a>
+      </div>
+      <p class="hero-note" style="margin-top:14px;"><span>✓</span> Sin compromiso &nbsp;·&nbsp; <span>✓</span> Respuesta rápida</p>
+    </div>
+    <div class="hero-photo">
+      <svg width="80" height="80" viewBox="0 0 24 24" stroke="#B8860B" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="photo-hint">📷 Aquí va tu foto</span>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- PROBLEMS -->
+<div class="section-bg" id="problemas">
+  <div style="padding: 72px 40px;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <h2 class="section-title">Problemas comunes en muchos pequeños negocios</h2>
+      <div class="problems-grid">
+        <div class="problem-card">
+          <div class="problem-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <p>Responder siempre las mismas preguntas</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.61 5 2 2 0 0 1 3.6 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.6a16 16 0 0 0 6 6l.95-1.05a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 18"/></svg></div>
+          <p>Mucho tiempo gestionando WhatsApp</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <p>Seguimiento manual de clientes</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
+          <p>Información desorganizada</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <p>Recordatorios y citas manuales</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <p>Tareas repetitivas que quitan tiempo</p>
+        </div>
+      </div>
+      <p class="problems-note"><strong>Muchas de estas tareas pueden simplificarse o automatizarse.</strong></p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SERVICES -->
+<section id="servicios" class="section">
+  <h2 class="section-title">Soluciones que puedo implementar</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2a9 9 0 1 0 9 9"/><path d="M12 8v4l2 2"/><circle cx="19" cy="5" r="3"/></svg></div>
+      <h3>Chatbot de WhatsApp con IA</h3>
+      <p>Responde automáticamente a tus clientes, califica leads y gestiona consultas frecuentes sin intervención manual.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3>Seguimiento de clientes</h3>
+      <p>Sistema automático para no perder oportunidades, con recordatorios y registro de conversaciones organizado.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div>
+      <h3>Recordatorios y citas</h3>
+      <p>Automatiza confirmaciones, recordatorios y reduce cancelaciones de forma totalmente automática.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+      <h3>Formularios y organización</h3>
+      <p>Recoge información, organiza contactos y datos importantes de clientes en un solo lugar accesible.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h2M7 12h2M13 8l2 2-2 2"/></svg></div>
+      <h3>Automatizaciones con IA</h3>
+      <p>Soluciones personalizadas adaptadas a las necesidades concretas de tu negocio y tu sector.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <h3>Optimización de procesos</h3>
+      <p>Analizo tu operativa actual e identifico qué pasos se pueden automatizar para ahorrarte tiempo y dinero.</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- ABOUT -->
+<section id="sobre-mi" class="section">
+  <div class="about-grid">
+    <div class="about-photo">
+      <svg width="80" height="80" viewBox="0 0 24 24" stroke="#B8860B" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="photo-hint">📷 Aquí va tu foto</span>
+    </div>
+    <div class="about-content">
+      <p class="about-tag">Entiendo tu día a día</p>
+      <h2>He estado<br>en tu lugar</h2>
+      <p>He trabajado tanto por cuenta propia como dentro de empresa, por lo que conozco de primera mano el tiempo que se pierde en tareas manuales, mensajes repetitivos y procesos poco organizados.</p>
+      <p>Durante este tiempo he aprendido a automatizar distintos procesos con inteligencia artificial para ahorrar tiempo y simplificar el trabajo diario.</p>
+      <div class="quote-block">
+        Mi objetivo es ayudarte a tener un negocio más organizado, eficiente y con menos tareas que te quiten tiempo.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="contacto" class="cta-section">
+  <h2>Cuéntame qué tareas repetitivas<br>haces cada semana</h2>
+  <p>Y vemos si se pueden simplificar o automatizar con IA.</p>
+  <a class="btn-cta" href="https://wa.me/34651685661">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.428a.5.5 0 0 0 .614.614l5.607-1.47A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.944 9.944 0 0 1-5.073-1.386l-.362-.214-3.754.984.997-3.63-.235-.374A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Hablar por WhatsApp
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Consultoría de IA · Madrid</span>
+  <span>
+    <a href="https://wa.me/34651685661">+34 651 685 661</a>
+  </span>
+</footer>
+
+</body>
+</html>
